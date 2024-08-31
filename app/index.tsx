@@ -33,6 +33,8 @@ export default function Index()
         </View>
       ))}
       <Button title= {contador.toString()} onPress={()=>{clicarBotao()}}></Button>
+
+      <CadastroProduto/>
     </View>
   );
 

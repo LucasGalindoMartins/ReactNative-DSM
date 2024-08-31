@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
+import { useEffect } from "react";
 
 const produtos = [
   {id: 1, nome: "Coca-cola", preco: 12.5},
@@ -12,11 +13,15 @@ const produtos = [
 export default function Index()
 {
   let [contador, setContador] = useState(0);
-  let[produtos, setProdutos] = useState([]);
+  let[produtos, setProdutos] = useState(1);
+
+  useEffect(()=>{
+    carregarProdutos();
+  },[])
 
   function carregarProdutos(){
-    axios.get('').then((resp)=>{
-      
+    axios.get('https://app-api-tapwm.onrender.com/api/produtos').then((resp)=>{
+
     })
   }
   return (

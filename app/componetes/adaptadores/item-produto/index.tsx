@@ -1,7 +1,9 @@
 import Produto from "@/app/models/produto";
 import style from "@/app/style/default";
-import { Text, View, Image } from "react-native";
+import { Text, View, Image, Button, Alert } from "react-native";
 import React from "react"
+import { ExclusiveGesture } from "react-native-gesture-handler/lib/typescript/handlers/gestures/gestureComposition";
+import axios from "axios";
 
 
 
@@ -16,12 +18,23 @@ const ItemProduto:React.FC<PropProd> = ({produto}) =>
 {
     console.log(produto);
 
+    function Excluir(id: number) {
+        let api= 'https://api-docker-2t8m.onrender.com/api/produtos'
+        axios.delete(`${api}/${id}`)
+        .then((resp)=>{
+        Alert.alert('Produto excluido com sucesso');
+        alert('Produto excluído com sucesso');
+        })
+    }
+
     return (
         <View style={style.card}> 
             <Text style={style.text}>{produto.nome}</Text>
             <Text style={style.text}>{produto.preco}</Text>
             <Image source={{uri:produto.foto}} 
             style={style.image} />
+            <Button title="Excluir"
+            onPress={()=>{Excluir(produto.id)}}/>
         </View>
     )
 

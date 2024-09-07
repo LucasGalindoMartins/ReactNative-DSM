@@ -2,18 +2,14 @@ import axios from "axios";
 import { useState } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { useEffect } from "react";
-
-const produtos = [
-  {id: 1, nome: "Coca-cola", preco: 12.5},
-  {id: 2, nome: "Pepsi", preco: 8.88},
-  {id: 3, nome: "Fanta", preco: 8.95},
-  {id: 4, nome: "Guaraná", preco: 6.5},
-];
+import CadastroProduto from "./componetes/adaptadores/CadastroProduto";
+import ListaProdutos from "./componetes/adaptadores/lista-produtos";
+import style from "./style/default";
 
 export default function Index()
 {
   let [contador, setContador] = useState(0);
-  let[produtos, setProdutos] = useState(1);
+  let[produtos, setProdutos] = useState([]);
 
   useEffect(()=>{
     carregarProdutos();
@@ -25,16 +21,15 @@ export default function Index()
     })
   }
   return (
-    <View style={main.view}>
-      {produtos.map((p)=> (
-        <View key={p.id}>
-        <Text style =  {main.titulo}>{p.nome} </Text>
-        <Text>{p.preco}</Text>
-        </View>
-      ))}
-      <Button title= {contador.toString()} onPress={()=>{clicarBotao()}}></Button>
+    <View style={style.container}
+    >
+     <ListaProdutos produtos={produtos}></ListaProdutos>
+    <Button title={contador.toString()}
+    onPress={()=>{clicarBotao()}}>
+    </Button>
 
       <CadastroProduto/>
+      
     </View>
   );
 

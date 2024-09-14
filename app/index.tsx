@@ -5,9 +5,17 @@ import { useEffect } from "react";
 import CadastroProduto from "./componetes/adaptadores/CadastroProduto";
 import ListaProdutos from "./componetes/adaptadores/lista-produtos";
 import style from "./style/default";
+import { useRouter } from "expo-router";
+import { useFocusEffect } from "expo-router";
 
 export default function Index()
 {
+  const router = useRouter();
+
+  useFocusEffect(()=>{
+    carregarProdutos();
+ })
+
   let [contador, setContador] = useState(0);
   let[produtos, setProdutos] = useState([]);
 
@@ -23,18 +31,16 @@ export default function Index()
   return (
     <View style={style.container}
     >
-     <ListaProdutos produtos={produtos}></ListaProdutos>
-    <Button title={contador.toString()}
-    onPress={()=>{clicarBotao()}}>
+     <ListaProdutos produtos={produtos} aoAtualizar={carregarProdutos}></ListaProdutos>
+    <Button title='Cadastrar'
+    onPress={()=>{telaCadastro()}}>
     </Button>
-
-      <CadastroProduto/>
       
     </View>
   );
 
-  function clicarBotao(){
-    setContador(contador+1);
+  function telaCadastro(){
+    router.push('./telas/cadastro');
   }
 }
 

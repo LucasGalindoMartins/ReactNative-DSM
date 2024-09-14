@@ -6,6 +6,7 @@ import React from "react";
 
 interface PropListaProd{
   produtos: Produto[];
+  aoAtualizar?:Function;
 }
 
 // Define o tipo para o produto
@@ -16,12 +17,12 @@ type produto = {
 };
 
 // Corrige o tipo de produtos para ser um array de objetos Produto
-const ListaProdutos:React.FC<PropListaProd> = ({produtos}) => {
+const ListaProdutos:React.FC<PropListaProd> = ({produtos, aoAtualizar}) => {
   return (
     <ScrollView>
       <View>
         {produtos.map((p) => (
-          <ItemProduto produto={p} key={p.id} />
+          <ItemProduto produto={p} key={p.id} aoExcluir={()=>{aoAtualizar?.call(null)}}/>
         ))}
       </View>
     </ScrollView>
